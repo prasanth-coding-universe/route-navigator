@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as DisruptionsRouteImport } from './routes/disruptions'
 import { Route as FleetRouteImport } from './routes/fleet'
+import { Route as OptimizerRouteImport } from './routes/optimizer'
 import { Route as ScheduleRouteImport } from './routes/schedule'
 
 const IndexRoute = IndexRouteImport.update({
@@ -29,6 +30,11 @@ const FleetRoute = FleetRouteImport.update({
   path: '/fleet',
   getParentRoute: () => rootRouteImport,
 } as any)
+const OptimizerRoute = OptimizerRouteImport.update({
+  id: '/optimizer',
+  path: '/optimizer',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ScheduleRoute = ScheduleRouteImport.update({
   id: '/schedule',
   path: '/schedule',
@@ -39,12 +45,14 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/disruptions': typeof DisruptionsRoute
   '/fleet': typeof FleetRoute
+  '/optimizer': typeof OptimizerRoute
   '/schedule': typeof ScheduleRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/disruptions': typeof DisruptionsRoute
   '/fleet': typeof FleetRoute
+  '/optimizer': typeof OptimizerRoute
   '/schedule': typeof ScheduleRoute
 }
 export interface FileRoutesById {
@@ -52,20 +60,22 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/disruptions': typeof DisruptionsRoute
   '/fleet': typeof FleetRoute
+  '/optimizer': typeof OptimizerRoute
   '/schedule': typeof ScheduleRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/disruptions' | '/fleet' | '/schedule'
+  fullPaths: '/' | '/disruptions' | '/fleet' | '/optimizer' | '/schedule'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/disruptions' | '/fleet' | '/schedule'
-  id: '__root__' | '/' | '/disruptions' | '/fleet' | '/schedule'
+  to: '/' | '/disruptions' | '/fleet' | '/optimizer' | '/schedule'
+  id: '__root__' | '/' | '/disruptions' | '/fleet' | '/optimizer' | '/schedule'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   DisruptionsRoute: typeof DisruptionsRoute
   FleetRoute: typeof FleetRoute
+  OptimizerRoute: typeof OptimizerRoute
   ScheduleRoute: typeof ScheduleRoute
 }
 
@@ -92,6 +102,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FleetRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/optimizer': {
+      id: '/optimizer'
+      path: '/optimizer'
+      fullPath: '/optimizer'
+      preLoaderRoute: typeof OptimizerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/schedule': {
       id: '/schedule'
       path: '/schedule'
@@ -106,6 +123,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   DisruptionsRoute: DisruptionsRoute,
   FleetRoute: FleetRoute,
+  OptimizerRoute: OptimizerRoute,
   ScheduleRoute: ScheduleRoute,
 }
 export const routeTree = rootRouteImport
