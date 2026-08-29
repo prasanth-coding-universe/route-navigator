@@ -1,5 +1,3 @@
-import { useEffect, useRef, useState } from 'react';
-import L from 'leaflet';
 
 export interface RouteStop {
   id: string;

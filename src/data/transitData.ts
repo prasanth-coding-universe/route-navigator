@@ -7,7 +7,7 @@ import {
   FleetVehicle,
   DisruptionEvent,
   OptimizationMetrics
-} from '../types';
+} from '@/lib/transit-types';
 
 export const DTC_DEPOTS: Depot[] = [
   {
