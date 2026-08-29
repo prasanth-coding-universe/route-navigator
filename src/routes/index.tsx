@@ -173,6 +173,8 @@ function Operations() {
 
       <div className="grid gap-4 xl:grid-cols-[2fr_1fr]">
         <Panel
+          className="min-w-0"
+
           title="Live vehicle tracking"
           hint="Telemetry from on-board units, refreshed every 20 seconds."
           action={
