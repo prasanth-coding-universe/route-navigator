@@ -10,12 +10,18 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as DisruptionsRouteImport } from './routes/disruptions'
 import { Route as FleetRouteImport } from './routes/fleet'
 import { Route as ScheduleRouteImport } from './routes/schedule'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DisruptionsRoute = DisruptionsRouteImport.update({
+  id: '/disruptions',
+  path: '/disruptions',
   getParentRoute: () => rootRouteImport,
 } as any)
 const FleetRoute = FleetRouteImport.update({
@@ -31,30 +37,34 @@ const ScheduleRoute = ScheduleRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/disruptions': typeof DisruptionsRoute
   '/fleet': typeof FleetRoute
   '/schedule': typeof ScheduleRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/disruptions': typeof DisruptionsRoute
   '/fleet': typeof FleetRoute
   '/schedule': typeof ScheduleRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/disruptions': typeof DisruptionsRoute
   '/fleet': typeof FleetRoute
   '/schedule': typeof ScheduleRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/fleet' | '/schedule'
+  fullPaths: '/' | '/disruptions' | '/fleet' | '/schedule'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/fleet' | '/schedule'
-  id: '__root__' | '/' | '/fleet' | '/schedule'
+  to: '/' | '/disruptions' | '/fleet' | '/schedule'
+  id: '__root__' | '/' | '/disruptions' | '/fleet' | '/schedule'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  DisruptionsRoute: typeof DisruptionsRoute
   FleetRoute: typeof FleetRoute
   ScheduleRoute: typeof ScheduleRoute
 }
@@ -66,6 +76,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/disruptions': {
+      id: '/disruptions'
+      path: '/disruptions'
+      fullPath: '/disruptions'
+      preLoaderRoute: typeof DisruptionsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/fleet': {
@@ -87,6 +104,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  DisruptionsRoute: DisruptionsRoute,
   FleetRoute: FleetRoute,
   ScheduleRoute: ScheduleRoute,
 }
